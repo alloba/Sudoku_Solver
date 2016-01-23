@@ -7,7 +7,6 @@ def gatherinput(filename):
      take input from a file, with directory specified as a parameter.
      ideally, correct format should be "[num][space][num][space].....[num][newline] * 9"
 
-    currently this is just used as an initialization for the gui, to fill it with something at the start
     """
 
     file = open(filename)
