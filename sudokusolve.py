@@ -15,9 +15,10 @@ def gatherinput(filename):
 
     return listify
 
-
-puzzle = SudokuPuzzle(gatherinput("C:\\CourseWork\\AI\\Sudoku\\sudoku.txt"))
-puzzleprevstep = puzzle.puzzle[:]
+try:
+    puzzle = SudokuPuzzle(gatherinput("C:\\CourseWork\\AI\\Sudoku\\sudoku.txt"))
+except FileNotFoundError:
+    puzzleprevstep = puzzle.puzzle[:]
 
 
 # GUI Methods
