@@ -8,9 +8,11 @@ def gatherinput(filename):
      ideally, correct format should be "[num][space][num][space].....[num][newline] * 9"
 
     """
-
-    file = open(filename)
-    puzzlein = file.read()
+    try:
+        file = open(filename)
+        puzzlein = file.read()
+    except FileNotFoundError:
+        puzzlein = "," * 81
     listify = puzzlein.replace('\t', ',').replace('\n', ',').replace(' ', ',').split(',')
 
     return listify
@@ -18,7 +20,8 @@ def gatherinput(filename):
 try:
     puzzle = SudokuPuzzle(gatherinput("C:\\CourseWork\\AI\\Sudoku\\sudoku.txt"))
 except FileNotFoundError:
-    puzzleprevstep = puzzle.puzzle[:]
+    puzzle = SudokuPuzzle()
+puzzleprevstep = puzzle.puzzle[:]
 
 
 # GUI Methods

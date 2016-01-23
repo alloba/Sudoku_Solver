@@ -4,7 +4,7 @@ class SudokuPuzzle:
     puzzlesize = puzzlewidth * puzzleheight
     puzzle = []
 
-    def __init__(self, puzzlestring):
+    def __init__(self, puzzlestring=","):
         for cell in puzzlestring:
             if cell == '0' or cell == '':
                 self.puzzle.append(0)
