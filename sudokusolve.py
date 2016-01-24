@@ -102,13 +102,28 @@ bool_m2 = tkinter.BooleanVar(window, False)
 entrygroup = tkinter.LabelFrame(window, text="")
 entrygroup.grid(row=0, column=0, rowspan=9, columnspan=9, padx=40)
 entrylist = []
-for i in range(81):
-    entrylist.append(tkinter.Entry(entrygroup, width=3, justify=tkinter.CENTER))
-    entrylist[i].insert(0, puzzle.puzzle[i])
+for i in range(9):
+    for j in range(9):
+        entrylist.append(tkinter.Entry(entrygroup, width=3, justify=tkinter.CENTER))
+        entrylist[i*9 + j].insert(0, puzzle.puzzle[i*9 + j])
 
 for i in range(9):
     for j in range(9):
         entrylist[i*9 + j].grid(row=i, column=j+1)
+
+
+#Hard-coded black lines to separate boxes on the puzzle. beest solution i could come up with...
+tkinter.Frame(entrygroup,bg="black",width=2,height=375).place(x=0,  y=10,anchor=tkinter.E)
+tkinter.Frame(entrygroup,bg="black",width=2,height=375).place(x=200,y=10,anchor=tkinter.E)
+tkinter.Frame(entrygroup,bg="black",width=375,height=2).place(x=10, y=171,anchor=tkinter.N)
+tkinter.Frame(entrygroup,bg="black",width=375,height=2).place(x=10, y=-2,anchor=tkinter.N)
+
+tkinter.Frame(entrygroup,bg="black",width=2,height=375).place(x=68,y=10,anchor=tkinter.E)
+tkinter.Frame(entrygroup,bg="black",width=2,height=375).place(x=133,y=10,anchor=tkinter.E)
+tkinter.Frame(entrygroup,bg="black",width=375,height=2).place(x=10,y=57,anchor=tkinter.N)
+tkinter.Frame(entrygroup,bg="black",width=375,height=2).place(x=10,y=113,anchor=tkinter.N)
+###
+
 
 
 validtext = tkinter.StringVar(window, "              ")
