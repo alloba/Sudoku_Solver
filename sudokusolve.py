@@ -58,7 +58,9 @@ def updateEntries():
             entrylist[i].insert(0, str(puzzle.puzzle[i]))
             entrylist[i].config(bg="red")  # to show that something has been filled in here
 
-def setEntries():
+def resetwindow():
+    validtext.set("")
+    solutionsfound.set(0)
     for i in range(81):
         entrylist[i].delete(0, tkinter.END)
         entrylist[i].insert(0, str(puzzle.puzzle[i]))
@@ -83,7 +85,7 @@ def openfile():
         global puzzleprevstep
         puzzle.updatepuzzle(gatherinput(filename))
         puzzleprevstep = puzzle.puzzle[:]
-        setEntries()
+        resetwindow()
         for entry in entrylist:
             entry.config(bg="white")
     except (FileNotFoundError, UnicodeDecodeError, ValueError) as e:
