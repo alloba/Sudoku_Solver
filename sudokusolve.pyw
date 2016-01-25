@@ -22,7 +22,6 @@ def gatherinput(filedirectory):
 
 try:
     filename = os.getcwd() + "\\puzzle.txt"
-    print(filename)
     puzzle = SudokuPuzzle(gatherinput(filename))
 except FileNotFoundError:
     puzzle = SudokuPuzzle()
@@ -120,6 +119,18 @@ def openfile():
     except (FileNotFoundError, UnicodeDecodeError, ValueError) as e:
         return
 
+
+def popuphelp():
+    helpwindow = tkinter.Toplevel()
+    helpwindow.title("Instructions")
+    helptext = """Fill in cells with initial puzzle values or
+load a file to start (check 'puzzle.txt' for example formatting).\n
+Choose method to solve, 1 being simpler, 2 being more complex,
+and press the enter key or press the 'step' button to find solutions"""
+    help_message = tkinter.Label(helpwindow, text=helptext, justify=tkinter.LEFT)
+    help_message.pack()
+
+
 # GUI Setup
 window = tkinter.Tk()
 window.resizable(width=0, height=0)
@@ -144,7 +155,7 @@ for i in range(9):
         entrylist[i*9 + j].grid(row=i, column=j+1)
 
 
-#Hard-coded black lines to separate boxes on the puzzle. beest solution i could come up with...
+# Hard-coded black lines to separate boxes on the puzzle. beest solution i could come up with...
 tkinter.Frame(entrygroup,bg="black",width=2,height=375).place(x=0,  y=10,anchor=tkinter.E)
 tkinter.Frame(entrygroup,bg="black",width=2,height=375).place(x=200,y=10,anchor=tkinter.E)
 tkinter.Frame(entrygroup,bg="black",width=375,height=2).place(x=10, y=171,anchor=tkinter.N)
@@ -182,7 +193,8 @@ btn_reset.grid(row=10, column=8)
 
 menubar = tkinter.Menu(window)
 menubar.add_command(label="Open New Puzzle", command=openfile)
-#TODO: Add menu button to display instructions/help
+menubar.add_command(label="Help", command=popuphelp)
+
 # call resetwindow once to get rid of all the 0's from the initial loading.
 resetwindow()
 
