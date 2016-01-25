@@ -26,8 +26,8 @@ try:
     puzzle = SudokuPuzzle(gatherinput(filename))
 except FileNotFoundError:
     puzzle = SudokuPuzzle()
-puzzleprevstep = puzzle.puzzle[:]
 
+puzzleprevstep = puzzle.puzzle[:]
 
 # GUI Methods
 def solveStep(junkvar=0):  # try to solve one step in the puzzle, and display an update.
@@ -67,7 +67,11 @@ def updateEntries():
     for i in range(81):
         if puzzle.puzzle[i] != puzzleprevstep[i]:
             entrylist[i].delete(0, tkinter.END)
-            entrylist[i].insert(0, str(puzzle.puzzle[i]))
+            if puzzle.puzzle[i] == 0:
+                entrylist[i].insert(0, "")
+            else:
+                entrylist[i].insert(0, str(puzzle.puzzle[i]))
+
             entrylist[i].config(bg="red")  # to show that something has been filled in here
 
 def resetwindow():
@@ -79,14 +83,21 @@ def resetwindow():
     solutionsfound.set(0)
     for i in range(81):
         entrylist[i].delete(0, tkinter.END)
-        entrylist[i].insert(0, str(puzzle.puzzle[i]))
+        if puzzle.puzzle[i] == 0:
+            entrylist[i].insert(0, "")
+        else:
+            entrylist[i].insert(0, str(puzzle.puzzle[i]))
+
         entrylist[i].config(bg="white")
 
 
 def getEntries():
     puzzleString = []
     for entry in entrylist:
-        puzzleString.append(entry.get())
+        if entry.get() == "":
+            puzzleString.append("0")
+        else:
+            puzzleString.append(entry.get())
     return puzzleString
 
 
@@ -171,6 +182,9 @@ btn_reset.grid(row=10, column=8)
 
 menubar = tkinter.Menu(window)
 menubar.add_command(label="Open New Puzzle", command=openfile)
+#TODO: Add menu button to display instructions/help
+# call resetwindow once to get rid of all the 0's from the initial loading.
+resetwindow()
 
 window.bind('<Return>', solveStep)
 window.config(menu=menubar)
