@@ -23,6 +23,7 @@ def gatherinput(filedirectory):
 try:
     filename = os.getcwd() + "\\puzzle.txt"
     puzzle = SudokuPuzzle(gatherinput(filename))
+
 except FileNotFoundError:
     puzzle = SudokuPuzzle()
 
@@ -88,6 +89,19 @@ def resetwindow():
             entrylist[i].insert(0, str(puzzle.puzzle[i]))
 
         entrylist[i].config(bg="white")
+
+
+def clearwindow():
+    global puzzle, puzzleprevstep, filename
+    #filename = ""
+    puzzle.updatepuzzle(gatherinput(""))
+    puzzleprevstep = puzzle.puzzle[:]
+
+    validtext.set("")
+    solutionsfound.set(0)
+    for i in range(81):
+        entrylist[i].delete(0, tkinter.END)
+    entrylist[i].config(bg="white")
 
 
 def getEntries():
@@ -188,8 +202,8 @@ chkbtn_method2.grid(row=9, column=1)
 btn_execute = tkinter.Button(window, text="Step", command=solveStep)
 btn_execute.grid(row=9, column=8)
 
-btn_reset = tkinter.Button(window, text="Reset", command = resetwindow)
-btn_reset.grid(row=10, column=8)
+btn_clear = tkinter.Button(window, text="Clear", command=clearwindow)
+btn_clear.grid(row=10, column=8)
 
 menubar = tkinter.Menu(window)
 menubar.add_command(label="Open New Puzzle", command=openfile)
