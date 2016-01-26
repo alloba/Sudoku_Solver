@@ -1,4 +1,6 @@
-import tkinter, os, sys
+import tkinter
+import os
+
 from puzzlecontainer import SudokuPuzzle
 from tkinter import filedialog
 
@@ -93,7 +95,6 @@ def resetwindow():
 
 def clearwindow():
     global puzzle, puzzleprevstep, filename
-    #filename = ""
     puzzle.updatepuzzle(gatherinput(""))
     puzzleprevstep = puzzle.puzzle[:]
 
