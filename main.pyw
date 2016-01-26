@@ -4,6 +4,8 @@ import os
 from puzzlecontainer import SudokuPuzzle
 from tkinter import filedialog
 
+__author__ = "Alex Bates"  # Because putting my name on it makes me feel warm and fuzzy.
+
 
 def gatherinput(filedirectory):
     """
@@ -22,6 +24,7 @@ def gatherinput(filedirectory):
 
     return listify
 
+
 try:
     filename = os.getcwd() + "\\puzzle.txt"
     puzzle = SudokuPuzzle(gatherinput(filename))
@@ -30,6 +33,7 @@ except FileNotFoundError:
     puzzle = SudokuPuzzle()
 
 puzzleprevstep = puzzle.puzzle[:]
+
 
 # GUI Methods
 def solveStep(junkvar=0):  # try to solve one step in the puzzle, and display an update.
@@ -40,7 +44,6 @@ def solveStep(junkvar=0):  # try to solve one step in the puzzle, and display an
     puzzle.updatepuzzle(getEntries())
     puzzleprevstep = puzzle.puzzle[:]
     updateEntries()
-
 
     simplebool = False
     singleinfbool = False
@@ -75,6 +78,7 @@ def updateEntries():
                 entrylist[i].insert(0, str(puzzle.puzzle[i]))
 
             entrylist[i].config(bg="red")  # to show that something has been filled in here
+
 
 def resetwindow():
     global puzzle, puzzleprevstep, filename
@@ -151,7 +155,6 @@ window = tkinter.Tk()
 window.resizable(width=0, height=0)
 window.title("Sudoku Solver")
 
-
 # these bools are for the checkboxes that select methods
 bool_m1 = tkinter.BooleanVar(window, True)
 bool_m2 = tkinter.BooleanVar(window, False)
@@ -163,23 +166,22 @@ entrylist = []
 for i in range(9):
     for j in range(9):
         entrylist.append(tkinter.Entry(entrygroup, width=3, justify=tkinter.CENTER))
-        entrylist[i*9 + j].insert(0, puzzle.puzzle[i*9 + j])
+        entrylist[i * 9 + j].insert(0, puzzle.puzzle[i * 9 + j])
 
 for i in range(9):
     for j in range(9):
-        entrylist[i*9 + j].grid(row=i, column=j+1)
-
+        entrylist[i * 9 + j].grid(row=i, column=j + 1)
 
 # Hard-coded black lines to separate boxes on the puzzle. beest solution i could come up with...
-tkinter.Frame(entrygroup,bg="black",width=2,height=375).place(x=0,  y=10,anchor=tkinter.E)
-tkinter.Frame(entrygroup,bg="black",width=2,height=375).place(x=200,y=10,anchor=tkinter.E)
-tkinter.Frame(entrygroup,bg="black",width=375,height=2).place(x=10, y=171,anchor=tkinter.N)
-tkinter.Frame(entrygroup,bg="black",width=375,height=2).place(x=10, y=-2,anchor=tkinter.N)
+tkinter.Frame(entrygroup, bg="black", width=2, height=375).place(x=0, y=10, anchor=tkinter.E)
+tkinter.Frame(entrygroup, bg="black", width=2, height=375).place(x=200, y=10, anchor=tkinter.E)
+tkinter.Frame(entrygroup, bg="black", width=375, height=2).place(x=10, y=171, anchor=tkinter.N)
+tkinter.Frame(entrygroup, bg="black", width=375, height=2).place(x=10, y=-2, anchor=tkinter.N)
 
-tkinter.Frame(entrygroup,bg="black",width=2,height=375).place(x=68,y=10,anchor=tkinter.E)
-tkinter.Frame(entrygroup,bg="black",width=2,height=375).place(x=133,y=10,anchor=tkinter.E)
-tkinter.Frame(entrygroup,bg="black",width=375,height=2).place(x=10,y=57,anchor=tkinter.N)
-tkinter.Frame(entrygroup,bg="black",width=375,height=2).place(x=10,y=113,anchor=tkinter.N)
+tkinter.Frame(entrygroup, bg="black", width=2, height=375).place(x=68, y=10, anchor=tkinter.E)
+tkinter.Frame(entrygroup, bg="black", width=2, height=375).place(x=133, y=10, anchor=tkinter.E)
+tkinter.Frame(entrygroup, bg="black", width=375, height=2).place(x=10, y=57, anchor=tkinter.N)
+tkinter.Frame(entrygroup, bg="black", width=375, height=2).place(x=10, y=113, anchor=tkinter.N)
 ###
 
 
@@ -216,4 +218,3 @@ resetwindow()
 window.bind('<Return>', solveStep)
 window.config(menu=menubar)
 window.mainloop()
-
