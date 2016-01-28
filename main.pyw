@@ -106,7 +106,7 @@ def clearwindow():
     solutionsfound.set(0)
     for i in range(81):
         entrylist[i].delete(0, tkinter.END)
-    entrylist[i].config(bg="white")
+        entrylist[i].config(bg="white")
 
 
 def getEntries():
@@ -143,7 +143,7 @@ def popuphelp():
     helpwindow = tkinter.Toplevel()
     helpwindow.title("Instructions")
     helptext = """Fill in cells with initial puzzle values or
-load a file to start (check 'puzzle.txt' for example formatting).\n
+load a file to start (check one of the puzzle '.txt' for example formatting).\n
 Choose method to solve, 1 being simpler, 2 being more complex,
 and press the enter key or press the 'step' button to find solutions"""
     help_message = tkinter.Label(helpwindow, text=helptext, justify=tkinter.LEFT)
